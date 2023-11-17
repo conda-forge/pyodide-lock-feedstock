@@ -98,7 +98,7 @@ outputs:
       commands:
         - pip check
         - coverage run --source=pyodide_lock --branch -m pytest -vv --color=yes
-        - coverage report --show-missing --skip-covered --cov=pyodide_lock --fail-under=81
+        - coverage report --show-missing --skip-covered --fail-under=92
       requires:
         - coverage
         - pip
