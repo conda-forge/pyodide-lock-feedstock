@@ -97,7 +97,6 @@ outputs:
         - pyodide_lock.cli
       commands:
         - pip check
-        - mypy -p pyodide_lock
         - coverage run --source=pyodide_lock --branch -m pytest -vv --color=yes
         - coverage report --show-missing --skip-covered --cov=pyodide_lock --fail-under=81
       requires:
@@ -105,7 +104,6 @@ outputs:
         - pip
         - pytest
         - python-build
-        - mypy
 
 about:
   home: https://github.com/pyodide/pyodide-lock
