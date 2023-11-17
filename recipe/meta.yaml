@@ -1,4 +1,4 @@
-{% set version = "0.1.0a3" %}
+{% set version = "0.1.0a4" %}
 
 package:
   name: pyodide-lock
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/p/pyodide-lock/pyodide_lock-{{ version }}.tar.gz
-  sha256: 58820b96ff0fad312e55a0bdcf41c504990168f638898bd7ea84bfe1a759801b
+  sha256: d24d98d1e72c38faa6f573e559e84541fb8d3d38bf1b3da05da65a1d4e027d49
 
 build:
   noarch: python
