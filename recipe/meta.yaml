@@ -1,5 +1,7 @@
-{% set version = "0.1.0a4" %}
-{% set min_python = "python >=3.10" %}
+{% set version = "0.1.0a5" %}
+
+# handle undefined PYTHON in `noarch: generic` outputs
+{% if PYTHON is not defined %}{% set PYTHON = "$PYTHON" %}{% endif %}
 
 package:
   name: pyodide-lock-split
@@ -7,7 +9,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/p/pyodide-lock/pyodide_lock-{{ version }}.tar.gz
-  sha256: d24d98d1e72c38faa6f573e559e84541fb8d3d38bf1b3da05da65a1d4e027d49
+  sha256: 8841eb0f7a067133a7b8699ed748b979d98101775b70beadf3c878291afa73c5
 
 build:
   noarch: python
@@ -15,9 +17,9 @@ build:
 
 requirements:
   host:
-    - {{ min_python }}
+    - python >=3.10
   run:
-    - {{ min_python }}
+    - python >=3.10
 
 outputs:
   - name: pyodide-lock
@@ -26,13 +28,13 @@ outputs:
       script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
     requirements:
       host:
-        - {{ min_python }}
         - hatch-vcs
         - hatchling
         - pip
+        - python >=3.10
       run:
-        - {{ min_python }}
-        - pydantic >=1.10.2,<2
+        - pydantic >=2
+        - python >=3.10
     test:
       imports:
         - pyodide_lock
@@ -43,12 +45,9 @@ outputs:
 
   - name: pyodide-lock-with-wheel
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - {{ min_python }}
       run:
-        - {{ min_python }}
         - {{ pin_subpackage("pyodide-lock", exact=True) }}
         - packaging
         - pkginfo
@@ -62,12 +61,9 @@ outputs:
 
   - name: pyodide-lock-with-cli
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - {{ min_python }}
       run:
-        - {{ min_python }}
         - {{ pin_subpackage("pyodide-lock", exact=True) }}
         - typer
     test:
@@ -80,12 +76,9 @@ outputs:
 
   - name: pyodide-lock-with-all
     build:
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - {{ min_python }}
       run:
-        - {{ min_python }}
         - {{ pin_subpackage("pyodide-lock", exact=True) }}
         - {{ pin_subpackage("pyodide-lock-with-cli", exact=True) }}
         - {{ pin_subpackage("pyodide-lock-with-wheel", exact=True) }}
