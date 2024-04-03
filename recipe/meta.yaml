@@ -1,4 +1,3 @@
-{% set min_python = "python >=3.10" %}
 {% set version = "0.1.0a5" %}
 {% set min_python = "python >=3.10" %}
 
@@ -33,7 +32,7 @@ outputs:
         - pip
       run:
         - {{ min_python }}
-        - pydantic >=1.10.2,<2
+        - pydantic >=2
     test:
       imports:
         - pyodide_lock
