@@ -1,4 +1,4 @@
-{% set version = "0.1.0a5" %}
+{% set version = "0.1.0a6" %}
 
 # handle undefined PYTHON in `noarch: generic` outputs
 {% if PYTHON is not defined %}{% set PYTHON = "$PYTHON" %}{% endif %}
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/p/pyodide-lock/pyodide_lock-{{ version }}.tar.gz
-  sha256: 8841eb0f7a067133a7b8699ed748b979d98101775b70beadf3c878291afa73c5
+  sha256: a4584e0e31270828b97587c1831e7aaa330f3318600392733537184ba511d279
 
 build:
   noarch: python
