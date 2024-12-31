@@ -86,6 +86,7 @@ outputs:
         - pip
         - pytest
         - python-build
+        - setuptools
       imports:
         - pyodide_lock
         - pyodide_lock.cli
