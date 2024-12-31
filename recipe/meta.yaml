@@ -1,3 +1,4 @@
+{% set python_min = '3.10' %}
 {% set version = "0.1.0a8" %}
 
 # handle undefined PYTHON in `noarch: generic` outputs
@@ -8,18 +9,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/p/pyodide-lock/pyodide_lock-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/p/pyodide-lock/pyodide_lock-{{ version }}.tar.gz
   sha256: 9ad5af230d30078aacc1d8055fae6b2273b5a882786eb30cc0b446d69f3af49e
 
 build:
   noarch: python
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.10
+    - python {{ python_min }}
   run:
-    - python >=3.10
+    - python >={{ python_min }}
 
 outputs:
   - name: pyodide-lock
@@ -31,10 +32,10 @@ outputs:
         - hatch-vcs
         - hatchling
         - pip
-        - python >=3.10
+        - python {{ python_min }}
       run:
         - pydantic >=2
-        - python >=3.10
+        - python >={{ python_min }}
     test:
       imports:
         - pyodide_lock
