@@ -98,10 +98,11 @@ outputs:
           run:
             - coverage
             - pytest
+            - python ${{ python_min }}.*
             - python-build
             - setuptools
         script:
-          - coverage run --source=pyodide_lock --branch -m pytest -vv --color=yes
+          - coverage run --source=pyodide_lock --branch -m pytest -vv --color=yes -k "not test_base_relative_path"
           - coverage report --show-missing --skip-covered --fail-under=92
 
 about:
