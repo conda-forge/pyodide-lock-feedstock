@@ -4,6 +4,8 @@ schema_version: 1
 context:
   version: "0.1.1"
   python_check_max: "3.14"
+  # pyodide-cli requires python 3.12+
+  python_check_min_cli: "3.12"
 
 recipe:
   name: pyodide-lock
@@ -73,7 +75,7 @@ outputs:
           imports: pyodide_lock.cli
           pip_check: true
           python_version:
-            - ${{ python_min }}.*
+            - ${{ python_check_min_cli }}.*
             - ${{ python_check_max }}.*
 
   - package:
@@ -90,7 +92,7 @@ outputs:
           imports: pyodide_lock.cli
           pip_check: true
           python_version:
-            - ${{ python_min }}.*
+            - ${{ python_check_min_cli }}.*
             - ${{ python_check_max }}.*
       - files:
           source:
@@ -99,7 +101,7 @@ outputs:
           run:
             - coverage
             - pytest
-            - python ${{ python_min }}.*
+            - python ${{ python_check_min_cli }}.*
             - python-build
             - setuptools
         script:
