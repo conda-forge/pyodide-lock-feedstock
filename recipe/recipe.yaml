@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "0.1.0"
+  version: "0.1.1"
   python_check_max: "3.13"
 
 recipe:
@@ -11,7 +11,7 @@ recipe:
 
 source:
   url: https://pypi.org/packages/source/p/pyodide-lock/pyodide_lock-${{ version }}.tar.gz
-  sha256: 0163716ac4c7be462d7948ea4db7f824d934c1dfc609a8acb20369032c6716f3
+  sha256: b2f0e0503f3ec9a3095e4e74af9cefe172f50f4b7767c786f6e02be67ce0730b
 
 build:
   number: 0
