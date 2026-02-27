@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "0.1.1"
+  version: "0.1.2"
   python_check_max: "3.14"
   # pyodide-cli requires python 3.12+
   python_check_min_cli: "3.12"
@@ -13,7 +13,7 @@ recipe:
 
 source:
   url: https://pypi.org/packages/source/p/pyodide-lock/pyodide_lock-${{ version }}.tar.gz
-  sha256: b2f0e0503f3ec9a3095e4e74af9cefe172f50f4b7767c786f6e02be67ce0730b
+  sha256: 5c438045833b40f937b3017e8ca6dceae4ec1122eb845ccac00f5ae234db9a4c
 
 build:
   number: 0
@@ -79,14 +79,32 @@ outputs:
             - ${{ python_check_max }}.*
 
   - package:
+      name: pyodide-lock-with-uv
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage("pyodide-lock-with-wheel", exact=True) }}
+        - python-uv >=0.9.27
+        - tomli
+    tests:
+      - python:
+          imports: pyodide_lock.uv_pip_compile
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
+
+  - package:
       name: pyodide-lock-with-all
     build:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("pyodide-lock", exact=True) }}
         - ${{ pin_subpackage("pyodide-lock-with-cli", exact=True) }}
+        - ${{ pin_subpackage("pyodide-lock-with-uv", exact=True) }}
         - ${{ pin_subpackage("pyodide-lock-with-wheel", exact=True) }}
+        - ${{ pin_subpackage("pyodide-lock", exact=True) }}
     tests:
       - python:
           imports: pyodide_lock.cli
@@ -112,7 +130,8 @@ about:
   summary: Tooling to manage the `pyodide-lock.json` file
   license: BSD-3-Clause
   license_file: LICENSE
-  homepage: https://github.com/pyodide/pyodide-lock
+  homepage: https://pypi.org/project/pyodide-lock
+  repository: https://github.com/pyodide/pyodide-lock
 
 extra:
   feedstock-name: pyodide-lock
