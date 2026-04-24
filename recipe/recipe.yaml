@@ -2,10 +2,9 @@
 schema_version: 1
 
 context:
-  version: "0.1.2"
+  version: "0.1.3"
+  python_min: "3.12"
   python_check_max: "3.14"
-  # pyodide-cli requires python 3.12+
-  python_check_min_cli: "3.12"
 
 recipe:
   name: pyodide-lock
@@ -13,7 +12,7 @@ recipe:
 
 source:
   url: https://pypi.org/packages/source/p/pyodide-lock/pyodide_lock-${{ version }}.tar.gz
-  sha256: 5c438045833b40f937b3017e8ca6dceae4ec1122eb845ccac00f5ae234db9a4c
+  sha256: 5ed700b4b1b88313d9c56bab721d5a4ed57304bbe83c172b647f74e1140e2177
 
 build:
   number: 0
@@ -75,7 +74,7 @@ outputs:
           imports: pyodide_lock.cli
           pip_check: true
           python_version:
-            - ${{ python_check_min_cli }}.*
+            - ${{ python_min }}.*
             - ${{ python_check_max }}.*
 
   - package:
@@ -110,7 +109,7 @@ outputs:
           imports: pyodide_lock.cli
           pip_check: true
           python_version:
-            - ${{ python_check_min_cli }}.*
+            - ${{ python_min }}.*
             - ${{ python_check_max }}.*
       - files:
           source:
@@ -119,7 +118,7 @@ outputs:
           run:
             - coverage
             - pytest
-            - python ${{ python_check_min_cli }}.*
+            - python ${{ python_min }}.*
             - python-build
             - setuptools
         script:
