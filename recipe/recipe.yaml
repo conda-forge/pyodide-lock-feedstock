@@ -74,7 +74,7 @@ outputs:
           imports: pyodide_lock.cli
           pip_check: true
           python_version:
-            - ${{ python_check_min_cli }}.*
+            - ${{ python_min }}.*
             - ${{ python_check_max }}.*
 
   - package:
@@ -109,7 +109,7 @@ outputs:
           imports: pyodide_lock.cli
           pip_check: true
           python_version:
-            - ${{ python_check_min_cli }}.*
+            - ${{ python_min }}.*
             - ${{ python_check_max }}.*
       - files:
           source:
@@ -118,7 +118,7 @@ outputs:
           run:
             - coverage
             - pytest
-            - python ${{ python_check_min_cli }}.*
+            - python ${{ python_min }}.*
             - python-build
         script:
           - coverage run --source=pyodide_lock --branch -m pytest -vv --color=yes -k "not test_base_relative_path"
